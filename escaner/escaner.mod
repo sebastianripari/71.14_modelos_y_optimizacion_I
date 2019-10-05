@@ -28,6 +28,11 @@ dvar int y25[Edges] in 0..1;
 
 minimize sum(i in Edges) (y12[i] + y13[i] + y24[i] + y25[i]);
 subject to {
+  ctUse0:
+    forall(i in Edges) {
+      y12[i] >= y24[i];
+      y12[i] >= y25[i];       
+    }
   ctUse1:
     forall(i in Edges) {
       y12[i] + y13[i] <= 1;
@@ -43,15 +48,3 @@ subject to {
   ctUse5:
    (sum(i in Edges) y25[i]) == 10;
 }
-
-execute DISPLAY {   
-  writeln("Output = " , cplex.getObjValue());
-}
-
-
-  
-  
- 
- 
- 
- 
