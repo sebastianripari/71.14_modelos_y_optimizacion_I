@@ -30,21 +30,16 @@ minimize sum(i in Edges) (y12[i] + y13[i] + y24[i] + y25[i]);
 subject to {
   ctUse0:
     forall(i in Edges) {
+      // Unique edge in each level
+      y12[i] + y13[i] <= 1;
+      y24[i] + y25[i] <= 1;    
+    
+      // Should pass through y12 before than y24 or y25
       y12[i] >= y24[i];
-      y12[i] >= y25[i];       
+      y12[i] >= y25[i]; 
     }
   ctUse1:
-    forall(i in Edges) {
-      y12[i] + y13[i] <= 1;
-    }     
-  ctUse2:
-    forall(i in Edges) {
-      y24[i] + y25[i] <= 1;
-    }
-  ctUse3:
    (sum(i in Edges) y13[i]) == 10;
-  ctUse4:
    (sum(i in Edges) y24[i]) == 10;
-  ctUse5:
    (sum(i in Edges) y25[i]) == 10;
 }
