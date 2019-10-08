@@ -19,6 +19,7 @@
  *********************************************/
  
 int TIEMPO_PROC_CAJA = ...;
+int CAJAS[1..3] = ...;
  
 int N = 30;
 range Edges = 1..N;
@@ -41,7 +42,7 @@ subject to {
       y12[i] >= y25[i]; 
     }
   ctUse1:
-   (sum(i in Edges) y13[i]) == 10;
-   (sum(i in Edges) y24[i]) == 10;
-   (sum(i in Edges) y25[i]) == 10;
+   (sum(i in Edges) y13[i]) == CAJAS[1];
+   (sum(i in Edges) y24[i]) == CAJAS[2];
+   (sum(i in Edges) y25[i]) == CAJAS[3];
 }

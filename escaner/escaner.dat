@@ -3,6 +3,8 @@
  * Author: La catedra
  * Creation Date: Aug 29, 2019 at 8:44:07 PM
  *********************************************/
+ 
+CAJAS = [ 10, 10, 10 ]; //Cajas por cod post
 
 TIEMPO_PROC_CAJA = 1; //Expresado en segundos
 
