@@ -18,6 +18,8 @@
  * Edges: y12, y13, y24, y25
  *********************************************/
  
+int TIEMPO_PROC_CAJA = ...;
+ 
 int N = 30;
 range Edges = 1..N;
  
@@ -26,7 +28,7 @@ dvar int y13[Edges] in 0..1;
 dvar int y24[Edges] in 0..1;
 dvar int y25[Edges] in 0..1;
 
-minimize sum(i in Edges) (y12[i] + y13[i] + y24[i] + y25[i]);
+minimize sum(i in Edges) ( TIEMPO_PROC_CAJA * ( y12[i] + y13[i] + y24[i] + y25[i]) );
 subject to {
   ctUse0:
     forall(i in Edges) {

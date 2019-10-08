@@ -4,4 +4,6 @@
  * Creation Date: Aug 29, 2019 at 8:44:07 PM
  *********************************************/
 
+TIEMPO_PROC_CAJA = 1; //Expresado en segundos
+
 /*Output: tiempo 50 seg*/ 
