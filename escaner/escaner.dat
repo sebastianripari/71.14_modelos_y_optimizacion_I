@@ -6,6 +6,8 @@
  
 CAJAS = [ 10, 10, 10 ]; //Cajas por cod post
 
+DESTINOS_POR_PASADA = 2;
+
 TIEMPO_PROC_CAJA = 1; //Expresado en segundos
 
 /*Output: tiempo 50 seg*/ 

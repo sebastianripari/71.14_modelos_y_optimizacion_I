@@ -17,15 +17,16 @@
  *
  * Edges: y12, y13, y24, y25
  *********************************************/
- 
+
+int DESTINOS_POR_PASADA = ...;
 int TIEMPO_PROC_CAJA = ...;
 int CAJAS[1..3] = ...;
  
 int N = 30;
 range Edges = 1..N;
  
-dvar int y1[Edges][1..2] in 0..1;
-dvar int y2[Edges][1..2] in 0..1;
+dvar int y1[Edges][1..DESTINOS_POR_PASADA] in 0..1;
+dvar int y2[Edges][1..DESTINOS_POR_PASADA] in 0..1;
 
 minimize sum(i in Edges) ( TIEMPO_PROC_CAJA * ( y1[i][1] + y1[i][2] + y2[i][1] + y2[i][2]) );
 subject to {
