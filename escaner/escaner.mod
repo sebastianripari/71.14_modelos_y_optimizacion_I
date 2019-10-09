@@ -33,8 +33,8 @@ subject to {
   ctUse0:
     forall(i in Edges) {
       // Unique edge in each level
-      y1[i][1] + y1[i][2] <= 1;
-      y2[i][1] + y2[i][2] <= 1;    
+      sum(j in 1..DESTINOS_POR_PASADA) y1[i][j] <= 1;
+      sum(j in 1..DESTINOS_POR_PASADA) y2[i][j] <= 1;    
     
       // Should pass through y12 before than y24 or y25
       y1[i][1] >= y2[i][1];
