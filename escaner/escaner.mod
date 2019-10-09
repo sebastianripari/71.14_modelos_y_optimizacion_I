@@ -36,8 +36,7 @@ subject to {
       sum(j in 1..DESTINOS_POR_PASADA) y[i][2][j] <= 1;    
     
       // Should pass through y12 before than y24 or y25
-      y[i][1][1] >= y[i][2*1][1];
-      y[i][1][1] >= y[i][2*1][2]; 
+      forall(j in 1..DESTINOS_POR_PASADA) y[i][1][1] >= y[i][2*1][j];      
     }
   ctUse1:
    (sum(i in Edges) y[i][2][1]) == CAJAS[1];
