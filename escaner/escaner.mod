@@ -28,7 +28,7 @@ range Edges = 1..N;
 dvar int y1[Edges][1..DESTINOS_POR_PASADA] in 0..1;
 dvar int y2[Edges][1..DESTINOS_POR_PASADA] in 0..1;
 
-minimize sum(i in Edges) ( TIEMPO_PROC_CAJA * ( y1[i][1] + y1[i][2] + y2[i][1] + y2[i][2]) );
+minimize sum(i in Edges) ( TIEMPO_PROC_CAJA * ( sum(j in 1..DESTINOS_POR_PASADA) (y1[i][j] + y2[i][j]) ) );
 subject to {
   ctUse0:
     forall(i in Edges) {
