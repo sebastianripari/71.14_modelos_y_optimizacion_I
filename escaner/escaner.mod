@@ -24,8 +24,11 @@ int CAJAS[1..3] = ...;
  
 int N = 30;
 range Edges = 1..N;
+
+int M = 1000000000000;
  
 dvar int y[Edges][1..2][1..DESTINOS_POR_PASADA] in 0..1;
+dvar int f[1..2][1..DESTINOS_POR_PASADA] in 0..1;
 
 minimize sum(i in Edges) ( TIEMPO_PROC_CAJA * ( sum(j in 1..DESTINOS_POR_PASADA) (y[i][1][j] + y[i][2][j]) ) );
 subject to {
@@ -39,7 +42,15 @@ subject to {
       forall(j in 1..DESTINOS_POR_PASADA) y[i][1][1] >= y[i][2*1][j];      
     }
   ctUse1:
-   (sum(i in Edges) y[i][2][1]) == CAJAS[1];
-   (sum(i in Edges) y[i][2][2]) == CAJAS[2];
-   (sum(i in Edges) y[i][1][2]) == CAJAS[3];
+   (sum(i in Edges) y[i][2][1]) <= 9 + f[2][1] + (1 - f[2][1]) * M;
+   (sum(i in Edges) y[i][2][1]) >= 10 * f[2][1];
+   f[2][1] == 1;
+   
+   (sum(i in Edges) y[i][2][2]) <= 9 + f[2][2] + (1 - f[2][2]) * M;
+   (sum(i in Edges) y[i][2][2]) >= 10 * f[2][2];
+   f[2][2] == 1;
+   
+   (sum(i in Edges) y[i][1][2]) <= 9 + f[1][2] + (1 - f[1][2]) * M;
+   (sum(i in Edges) y[i][1][2]) >= 10 * f[1][2];
+   f[1][2] == 1;
 }
