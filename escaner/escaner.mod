@@ -31,7 +31,7 @@ subject to {
 	 } 
 	RELACION_COD_POSTAL_PADRE_HIJO:
 	  forall(padre in 1..(CANT_NODOS - ftoi(pow(DESTINOS_POR_PASADA, TECHO_MAX + 1)))) {
-	  	  (sum(hijo in ((padre * DESTINOS_POR_PASADA) + 1 - DESTINOS_POR_PASADA + 1)..(padre * DESTINOS_POR_PASADA + 1)) CPN[hijo - 1]) == CPN[padre - 1];
+	  	  (sum(hijo in ((padre * DESTINOS_POR_PASADA) + 1 - DESTINOS_POR_PASADA + 1)..(padre * DESTINOS_POR_PASADA + 1)) CPN[hijo]) == CPN[padre];
 	  }
     CANT_COD_POSTAL_MUERTOS:
       forall(nodo in 1..CANT_NODOS) {
