@@ -26,9 +26,11 @@ int N = 30;
 range Edges = 1..N;
 
 int M = 10000000;
+
+int levels = 2;
  
 dvar int y[Edges][1..3][1..DESTINOS_POR_PASADA] in 0..1;
-dvar int f[1..3][1..3][1..DESTINOS_POR_PASADA] in 0..1;
+dvar int f[1..5][1..3][1..DESTINOS_POR_PASADA] in 0..1;
 
 minimize sum(i in Edges) ( TIEMPO_PROC_CAJA * ( sum(j in 1..3) sum(k in 1..DESTINOS_POR_PASADA) (y[i][j][k]) ) );
 subject to {
@@ -46,12 +48,21 @@ subject to {
   ctUse1:
    forall(j in 1..3) {
       forall(k in 1..2) {
+        // y[j][k] es parte del ultimo nivel => f[4][j][k] = 1
+        j <= 2^levels - 1 + (1 - f[4][j][k]) * M;
+        j >= 2^(levels - 1) * f[4][j][k];      
+      
+        // y[j][k] == 10 => f[3][j][k] = 1
         (sum(i in Edges) y[i][j][k]) <= 10 * f[1][j][k] + (1 - f[1][j][k]) * M;
         (sum(i in Edges) y[i][j][k]) >= 10 * f[2][j][k] - (1 - f[2][j][k]) * M;
-        
         f[1][j][k] + f[2][j][k] >= 2 * f[3][j][k];
         f[1][j][k] + f[2][j][k] <= 1 + f[3][j][k];
-      }            
+        
+        // y[3][j][k] = 1 & y[4][j][k] = 1 => y[5][j][k] = 1
+        f[3][j][k] + f[4][j][k] >= 2 * f[5][j][k];
+        f[3][j][k] + f[4][j][k] <= 1 + f[5][j][k];
+      }
+                   
    }
-   ( sum(j in 1..3) sum(k in 1..2) f[3][j][k] ) == 3;
+   ( sum(j in 1..3) sum(k in 1..2) f[5][j][k] ) == 3;
 }
