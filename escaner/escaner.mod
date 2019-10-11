@@ -3,66 +3,56 @@
  * Author: Grupo 5
  * Creation Date: Oct 5, 2019 at 12:41:48 AM
  *********************************************/
-
-/*********************************************
- *                     1
- *                  /     \ 
- *             y11 /       \ y12 
- *                /         \
- *               2           3
- *              / \         / \ 
- *         y21 /   \y22 y31/   \y32 
- *            /     \     /     \
- *           4       5   7       6
- *
- * Edges: y12, y13, y24, y25
- *********************************************/
+ 
+int CANT_COD_POST = 3; //Hardcode
 
 int DESTINOS_POR_PASADA = ...;
 int TIEMPO_PROC_CAJA = ...;
-int CAJAS[1..3] = ...;
- 
-int N = 30;
-range Edges = 1..N;
+int CAJAS[0..CANT_COD_POST - 1] = ...;
+
+int TECHO_MAX = ftoi(ceil((CANT_COD_POST - 1) / (DESTINOS_POR_PASADA - 1)));
+
+int CANT_NODOS = ftoi((sum(i in 1..TECHO_MAX) pow(DESTINOS_POR_PASADA, i)) + 1);
+
+dvar int CPN[1..CANT_NODOS];
+dvar int CPN_MUERTO[1..CANT_NODOS] in 0..1;
+
+dvar int CODIGO_POSTAL_EN_NODO[0..(CANT_COD_POST - 1)][1..CANT_NODOS] in 0..1;
 
 int M = 10000000;
 
-int levels = 2;
- 
-dvar int y[Edges][1..3][1..DESTINOS_POR_PASADA] in 0..1;
-dvar int f[1..5][1..3][1..DESTINOS_POR_PASADA] in 0..1;
+range seba = 1..2;
 
-minimize sum(i in Edges) ( TIEMPO_PROC_CAJA * ( sum(j in 1..3) sum(k in 1..DESTINOS_POR_PASADA) (y[i][j][k]) ) );
+minimize sum(nodo in 2..CANT_NODOS) sum(cp in 0..(CANT_COD_POST - 1)) CODIGO_POSTAL_EN_NODO[cp][nodo] * CAJAS[cp];
 subject to {
-  ctUse0:
-    forall(i in Edges) {
-      // Unique edge in each level
-      sum(j in 1..DESTINOS_POR_PASADA) y[i][1][j] <= 1;
-      sum(j in 1..DESTINOS_POR_PASADA) y[i][2][j] <= 1;
-      sum(j in 1..DESTINOS_POR_PASADA) y[i][3][j] <= 1;    
-    
-      // Should pass through y12 before than y24 or y25
-      forall(j in 1..DESTINOS_POR_PASADA) y[i][1][1] >= y[i][2*1][j];   
-      forall(j in 1..DESTINOS_POR_PASADA) y[i][1][2] >= y[i][2*1 + 1][j];   
-    }
-  ctUse1:
-   forall(j in 1..3) {
-      forall(k in 1..2) {
-        // y[j][k] es parte del ultimo nivel => f[4][j][k] = 1
-        j <= 2^levels - 1 + (1 - f[4][j][k]) * M;
-        j >= 2^(levels - 1) * f[4][j][k];      
-      
-        // y[j][k] == 10 => f[3][j][k] = 1
-        (sum(i in Edges) y[i][j][k]) <= 10 * f[1][j][k] + (1 - f[1][j][k]) * M;
-        (sum(i in Edges) y[i][j][k]) >= 10 * f[2][j][k] - (1 - f[2][j][k]) * M;
-        f[1][j][k] + f[2][j][k] >= 2 * f[3][j][k];
-        f[1][j][k] + f[2][j][k] <= 1 + f[3][j][k];
-        
-        // y[3][j][k] = 1 & y[4][j][k] = 1 => y[5][j][k] = 1
-        f[3][j][k] + f[4][j][k] >= 2 * f[5][j][k];
-        f[3][j][k] + f[4][j][k] <= 1 + f[5][j][k];
+	CONDICION_INICIAL: 
+	  CPN[1] == CANT_COD_POST;
+	CANT_COD_POSTAL_POR_NODO:
+	 forall(nodo in 1..CANT_NODOS) {
+	 	 (sum(cp in 0..(CANT_COD_POST - 1)) CODIGO_POSTAL_EN_NODO[cp][nodo]) == CPN[nodo];
+	 } 
+	RELACION_COD_POSTAL_PADRE_HIJO:
+	  forall(padre in 1..(CANT_NODOS - ftoi(pow(DESTINOS_POR_PASADA, TECHO_MAX + 1)))) {
+	  	  (sum(hijo in ((padre * DESTINOS_POR_PASADA) + 1 - DESTINOS_POR_PASADA + 1)..(padre * DESTINOS_POR_PASADA + 1)) CPN[hijo - 1]) == CPN[padre - 1];
+	  }
+    CANT_COD_POSTAL_MUERTOS:
+      forall(nodo in 1..CANT_NODOS) {
+         CPN[nodo] <= CPN_MUERTO[nodo] + ((1 - CPN_MUERTO[nodo]) * M);
+         CPN[nodo] >= CPN_MUERTO[nodo];
       }
-                   
-   }
-   ( sum(j in 1..3) sum(k in 1..2) f[5][j][k] ) == 3;
+      (sum(nodo in 1..CANT_NODOS) CPN_MUERTO[nodo]) == CANT_COD_POST;
 }
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
