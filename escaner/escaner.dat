@@ -3,7 +3,9 @@
  * Author: La catedra
  * Creation Date: Aug 29, 2019 at 8:44:07 PM
  *********************************************/
- 
+
+CANT_COD_POST = 3; //Cantidad de cod postales / cajas
+
 CAJAS = [ 10, 10, 10 ]; //Cajas por cod post
 
 DESTINOS_POR_PASADA = 2;

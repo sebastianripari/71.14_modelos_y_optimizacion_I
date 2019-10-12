@@ -9,6 +9,12 @@
 			<ref name="escaner.dat" type="data">
 			</ref>
 		</config>
+		<config default="false" name="Escaner" category="opl">
+			<ref name="escaner.mod" type="model">
+			</ref>
+			<ref name="escaner.dat" type="data">
+			</ref>
+		</config>
 	</configs>
 	
 </project>
