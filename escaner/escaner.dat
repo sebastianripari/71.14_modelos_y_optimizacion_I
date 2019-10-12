@@ -4,12 +4,12 @@
  * Creation Date: Aug 29, 2019 at 8:44:07 PM
  *********************************************/
 
-CANT_COD_POST = 5; //Cantidad de cod postales / cajas
+CANT_COD_POST = 6; //Cantidad de cod postales / cajas 
 
-CAJAS = [ 10, 10, 10, 10, 10 ]; //Cajas por cod post
+CAJAS = [ 30, 30, 10, 10, 10, 10 ]; //Cajas por cod post
 
-DESTINOS_POR_PASADA = 2;
+DESTINOS_POR_PASADA = 3;
 
 TIEMPO_PROC_CAJA = 1; //Expresado en segundos
 
-/*Output: tiempo 50 seg*/ 
+/*Output: tiempo 160 seg*/ 
