@@ -51,6 +51,12 @@ subject to {
          CPN[nodo] >= CPN_MUERTO[nodo];
       }
       (sum(nodo in 1..CANT_NODOS) CPN_MUERTO[nodo]) == CANT_COD_POST;
+    COD_POSTAL_EN_NIVEL:
+      forall(nivel in 1..(TECHO_MAX + 1)) {
+        forall(cp in 1..CANT_COD_POST) {
+          (sum(nodo in ftoi(pow(DESTINOS_POR_PASADA, nivel - 1))..ftoi(pow(DESTINOS_POR_PASADA, nivel) - 1)) CODIGO_POSTAL_EN_NODO[cp][nodo]) <= 1;        
+        }      
+      }
 }
 
  
