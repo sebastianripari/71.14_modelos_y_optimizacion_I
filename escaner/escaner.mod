@@ -57,6 +57,14 @@ subject to {
           (sum(nodo in ftoi(pow(DESTINOS_POR_PASADA, nivel - 1))..ftoi(pow(DESTINOS_POR_PASADA, nivel) - 1)) CODIGO_POSTAL_EN_NODO[cp][nodo]) <= 1;        
         }      
       }
+    COD_POSTAL_FORWARDING:
+      // Creo que es sobre restrictiva, porque tambien me estoy asegurando que no aparezca >1 vez en el nivel de abajo, qcyo.
+      forall(cp in 1..CANT_COD_POST) {
+        forall(padre in 1..PADRES) {
+	  	  (CPN_VIVO[padre] == 1) =>	  
+	  	    	(sum(hijo in ((padre * DESTINOS_POR_PASADA) + 1 - DESTINOS_POR_PASADA + 1)..(padre * DESTINOS_POR_PASADA + 1)) CODIGO_POSTAL_EN_NODO[cp][hijo]) == CODIGO_POSTAL_EN_NODO[cp][padre];
+	    }
+ 	  }	  
 }
 
  
