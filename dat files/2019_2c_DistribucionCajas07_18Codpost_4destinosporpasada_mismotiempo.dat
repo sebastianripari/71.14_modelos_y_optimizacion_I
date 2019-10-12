@@ -4,9 +4,7 @@
  * Creation Date: Aug 29, 2019 at 8:44:07 PM
  *********************************************/
 
-COD_POST = {"A", "B", "C", "D", "E", "F", "G", "H", 
-			"I", "J", "K", "L", "M", "N", "O", "P",
-			"Q", "R" }; 
+CANT_COD_POST = 18; //Cantidad de cod postales / cajas 
 
 CAJAS = [ 	10, 10, 10, 10, 10, 10, 10, 10,
 			10, 10, 10, 10, 10, 10, 10, 10,
@@ -15,3 +13,5 @@ CAJAS = [ 	10, 10, 10, 10, 10, 10, 10, 10,
 DESTINOS_POR_PASADA = 4;
 
 TIEMPO_PROC_CAJA = 1; //Expresado en segundos
+
+// Output santi aguilera CPLEX: 390

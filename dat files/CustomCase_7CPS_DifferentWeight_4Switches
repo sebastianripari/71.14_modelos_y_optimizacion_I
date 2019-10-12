@@ -1,17 +1,15 @@
-// Identico al otro solo que con processing time de 5s
-
 CANT_COD_POST = 7; //Cantidad de cod postales / cajas 
 
 CAJAS = [ 20, 1, 3, 40, 4, 60, 2 ]; //Cajas por cod post
 
 DESTINOS_POR_PASADA = 4;
 
-TIEMPO_PROC_CAJA = 5; //Expresado en segundos
+TIEMPO_PROC_CAJA = 1; //Expresado en segundos
 
 /* Resultado deberia ser 
    Nivel root: 60/40/20/1/2/3/4
    Nivel uno: 60 - 40 - 20 - 1/2/3/4 => 130s
    Nivel dos branch 1/2/3/4: 1 - 2 - 3 - 4 => 10s
 
-   Total tiempo: 140s * 5s = 700s
+   Total tiempo: 140s
 */
