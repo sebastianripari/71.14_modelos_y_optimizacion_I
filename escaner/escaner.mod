@@ -22,7 +22,7 @@ dvar int CODIGO_POSTAL_EN_NODO[1..CANT_COD_POST][1..CANT_NODOS] in 0..1;
 int M = 10000000;
 int PADRES = (CANT_NODOS - ftoi(pow(DESTINOS_POR_PASADA, TECHO_MAX)));
 
-minimize sum(nodo in 2..CANT_NODOS) sum(cp in 1..CANT_COD_POST) CODIGO_POSTAL_EN_NODO[cp][nodo] * CAJAS[cp];
+minimize sum(nodo in 2..CANT_NODOS) sum(cp in 1..CANT_COD_POST) CODIGO_POSTAL_EN_NODO[cp][nodo] * CAJAS[cp] * TIEMPO_PROC_CAJA;
 subject to {
 	CONDICION_INICIAL: 
 	  CPN[1] == CANT_COD_POST;
