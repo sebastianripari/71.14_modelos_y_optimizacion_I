@@ -26,7 +26,7 @@ Lo que veo que pasa es que:
 */
 
 int M = 10000000;
-int PADRES = ftoi(pow(DESTINOS_POR_PASADA, TECHO_MAX)) - 1;
+int PADRES = (CANT_NODOS - ftoi(pow(DESTINOS_POR_PASADA, TECHO_MAX)));
 
 minimize sum(nodo in 2..CANT_NODOS) sum(cp in 1..CANT_COD_POST) CODIGO_POSTAL_EN_NODO[cp][nodo] * CAJAS[cp];
 subject to {
@@ -51,14 +51,8 @@ subject to {
          CPN[nodo] >= CPN_MUERTO[nodo];
       }
       (sum(nodo in 1..CANT_NODOS) CPN_MUERTO[nodo]) == CANT_COD_POST;
-    COD_POSTAL_EN_NIVEL:
-      forall(nivel in 1..(TECHO_MAX + 1)) {
-        forall(cp in 1..CANT_COD_POST) {
-          (sum(nodo in ftoi(pow(DESTINOS_POR_PASADA, nivel - 1))..ftoi(pow(DESTINOS_POR_PASADA, nivel) - 1)) CODIGO_POSTAL_EN_NODO[cp][nodo]) <= 1;        
-        }      
-      }
     COD_POSTAL_FORWARDING:
-      // Creo que es sobre restrictiva, porque tambien me estoy asegurando que no aparezca >1 vez en el nivel de abajo, qcyo.
+      // Esta rule valida no solo que los hijos tengan al del padre, sino tambien que solo aparezca 1 vez cada uno por nivel (porque justamente viene dado implicitamente)
       forall(cp in 1..CANT_COD_POST) {
         forall(padre in 1..PADRES) {
 	  	  (CPN_VIVO[padre] == 1) =>	  
