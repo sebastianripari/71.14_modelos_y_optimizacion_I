@@ -13,3 +13,5 @@ CAJAS = [ 	60, 	20, 	10, 	40, 	80, 	900, 	50,	10,
 DESTINOS_POR_PASADA = 4;
 
 TIEMPO_PROC_CAJA = 1; //Expresado en segundos
+
+// Output santi aguilera CPLEX: 9.450

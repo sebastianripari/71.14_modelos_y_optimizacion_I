@@ -19,12 +19,6 @@ dvar int CPN_VIVO[1..CANT_NODOS] in 0..1;
 
 dvar int CODIGO_POSTAL_EN_NODO[1..CANT_COD_POST][1..CANT_NODOS] in 0..1;
 
-/*
-Lo que veo que pasa es que:
-- En un mismo nivel estamos permitiendo que un CP vaya a mas de un nodo, deberiamos crear una restriccion que permita, por nivel del arbol, mandar un CP a un solo lugar (y no 2,3,4,5...). Hoy esta pasando que A va a 2 y 3 (porque es indistinto de B / C)
-- No veo que tengamos una restriccion que fuerze a un CP a aparecer en otro lado mistico para cumplir. Por ejemplo, puede estar en 2 y en el proximo nivel en 6/7. No distinguimos un CP de otro. Asi como forzamos a que aparezca 1 vez por nivel, deberiamos forzarlo a que solo aparezca si el padre lo tiene tambien. (Sino podria aparecer en 2 y despues en 6/7)
-*/
-
 int M = 10000000;
 int PADRES = (CANT_NODOS - ftoi(pow(DESTINOS_POR_PASADA, TECHO_MAX)));
 

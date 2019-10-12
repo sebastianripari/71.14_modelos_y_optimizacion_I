@@ -14,3 +14,4 @@ DESTINOS_POR_PASADA = 4;
 
 TIEMPO_PROC_CAJA = 1; //Expresado en segundos
 
+// Output santi aguilera CPLEX: 10.110
