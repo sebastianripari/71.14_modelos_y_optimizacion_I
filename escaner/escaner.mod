@@ -4,10 +4,10 @@
  * Creation Date: Oct 5, 2019 at 12:41:48 AM
  *********************************************/
 
-int CANT_COD_POST = ...;
-int DESTINOS_POR_PASADA = ...;
-int TIEMPO_PROC_CAJA = ...;
-int CAJAS[1..CANT_COD_POST] = ...;
+int CANT_COD_POST = ...; // Cambiamos el .dat de la catedra para que utilice en vez del json {'A','B','C'} => CANT_COD_POST = 3;
+int DESTINOS_POR_PASADA = ...; // Idem .dat de la catedra
+int TIEMPO_PROC_CAJA = ...; // Idem .dat de la catedra
+int CAJAS[1..CANT_COD_POST] = ...; // Idem .dat de la catedra
 
 int NIVELES_ARBOL = ftoi(ceil((CANT_COD_POST - 1) / (DESTINOS_POR_PASADA - 1)));
 

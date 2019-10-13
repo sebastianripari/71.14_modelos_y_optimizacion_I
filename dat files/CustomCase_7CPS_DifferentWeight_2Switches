@@ -1,0 +1,19 @@
+CANT_COD_POST = 7; //Cantidad de cod postales / cajas 
+
+CAJAS = [ 20, 1, 3, 40, 4, 60, 2 ]; //Cajas por cod post
+
+DESTINOS_POR_PASADA = 2;
+
+TIEMPO_PROC_CAJA = 1; //Expresado en segundos
+
+/* Resultado deberia ser 
+   Nivel root: 60/40/20/1/2/3/4
+   Nivel uno: 60 - 40/20/1/2/3/4  => 130s
+   Nivel dos branch: 40/20/1/2/3/4: 40 - 20/1/2/3/4 => 70s
+   Nivel tres branch: 20 - 1/2/3/4 => 30s
+   Nivel cuatro branch: 4 - 1/2/3 => 10s
+   Nivel cinco branch: 3 - 1/2 => 6s
+   Nivel seis branch: 2 - 1 => 3s
+
+   Total tiempo: 249s
+*/
